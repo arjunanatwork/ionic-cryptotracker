@@ -1,0 +1,44 @@
+ion-col.list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-label.coin-header {
+  display: inline-block !important;
+  color: #5a8cc0 !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+ion-label.coin-item {
+  color: #324466 !important;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.coin-sym {
+  margin-left: 5px;
+}
+
+.sparkline {
+  margin: 0px 5px;
+}
+
+/** Media Queries **/
+@media (max-width: 567px) {
+
+  ion-label.coin-header {
+    font-size: 10px !important;
+  }
+
+  ion-label.coin-item {
+    font-size: 12px !important;
+  }
+
+}
