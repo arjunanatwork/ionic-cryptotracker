@@ -4,10 +4,10 @@ import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'bitcoin',
+        redirectTo: 'cryptotracker',
         pathMatch: 'full'
     },
-    {path: 'bitcoin', loadChildren: './bitcoin/bitcoin.module#BitcoinPageModule'},
+    {path: 'cryptotracker', loadChildren: './cryptotracker/cryptotracker.module#CryptotrackerPageModule'},
     {path: 'currency', loadChildren: './currency/currency.module#CurrencyPageModule'}
 ];
 

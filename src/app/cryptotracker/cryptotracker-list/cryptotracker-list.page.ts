@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {CoinService} from '../bitcoin-shared/services/coin.service';
+import {CoinService} from '../cryptotracker-shared/services/coin.service';
 import {Storage} from '@ionic/storage';
-import {RootObject} from '../bitcoin-shared/models/coin.model';
+import {RootObject} from '../cryptotracker-shared/models/coin.model';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
-  selector: 'app-bitcoin-list',
-  templateUrl: './bitcoin-list.page.html',
-  styleUrls: ['./bitcoin-list.page.scss']
+  selector: 'app-cryptotracker-list',
+  templateUrl: './cryptotracker-list.page.html',
+  styleUrls: ['./cryptotracker-list.page.scss']
 })
-export class BitcoinListPage implements OnInit {
+export class CryptotrackerListPage implements OnInit {
 
   bitcoinData: RootObject;
   offset = 0;
@@ -52,7 +52,7 @@ export class BitcoinListPage implements OnInit {
   }
 
   navigateToCoinDetail(id: number) {
-    this.router.navigate(['bitcoin/coins', id], {relativeTo: this.route.parent});
+    this.router.navigate(['cryptotracker/coins', id], {relativeTo: this.route.parent});
   }
 
 }

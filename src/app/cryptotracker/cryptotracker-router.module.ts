@@ -1,22 +1,22 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {BitcoinPage} from './bitcoin.page';
-import {BitcoinListPage} from './bitcoin-list/bitcoin-list.page';
-import {BitcoinDetailComponent} from './bitcoin-detail/bitcoin-detail.component';
+import {CryptotrackerPage} from './cryptotracker.page';
+import {CryptotrackerListPage} from './cryptotracker-list/cryptotracker-list.page';
+import {CryptotrackerDetailComponent} from './cryptotracker-detail/cryptotracker-detail.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: BitcoinPage,
+        component: CryptotrackerPage,
         children : [
             { path: '', redirectTo: 'coins', pathMatch: 'full' },
             {
                 path: 'coins',
-                component: BitcoinListPage
+                component: CryptotrackerListPage
             },
             {
                 path: 'coins/:id',
-                component: BitcoinDetailComponent
+                component: CryptotrackerDetailComponent
             }
         ]
     },
@@ -27,5 +27,5 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class BitcoinRoutingModule {
+export class CryptotrackerRoutingModule {
 }
