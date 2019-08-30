@@ -3,9 +3,23 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Bitcoin Tracker</ion-title>
+    <ion-title>Crypto Tracker</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <p>Hello There</p>
+ <ion-segment [(ngModel)]="segment">
+   <ion-segment-button value="overview">
+     <ion-label>Overview</ion-label>
+   </ion-segment-button>
+   <ion-segment-button value="markets">
+     <ion-label>Markets</ion-label>
+   </ion-segment-button>
+   <ion-segment-button value="exchanges">
+     <ion-label>Exchanges</ion-label>
+   </ion-segment-button>
+ </ion-segment>
+
+  <div [ngSwitch]="segment" padding>
+    <app-cryptotracker-detail-overview [slug]="slug" *ngSwitchCase="'overview'"></app-cryptotracker-detail-overview>
+  </div>
 </ion-content>

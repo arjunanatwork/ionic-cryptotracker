@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-cryptotracker-detail',
@@ -7,8 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CryptotrackerDetailComponent implements OnInit {
 
-  constructor() { }
+  segment: string;
+  slug: string;
 
-  ngOnInit() {}
+  constructor(private router: Router, private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    try {
+      this.slug = this.router.getCurrentNavigation().extras.state.slug;
+    } catch (e) {
+      this.router.navigate(['cryptotracker/coins'], {relativeTo: this.route.parent});
+    }
+  }
 
 }

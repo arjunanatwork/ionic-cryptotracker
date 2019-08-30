@@ -8,7 +8,7 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {path: 'cryptotracker', loadChildren: './cryptotracker/cryptotracker.module#CryptotrackerPageModule'},
-    {path: 'currency', loadChildren: './currency/currency.module#CurrencyPageModule'}
+    {path: 'currency', loadChildren: './currency/currency.module#CurrencyPageModule'},
 ];
 
 @NgModule({

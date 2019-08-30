@@ -10,6 +10,7 @@ import {CryptotrackerListPage} from './cryptotracker-list/cryptotracker-list.pag
 import {IonicStorageModule} from '@ionic/storage';
 import {OnCreateChartDirective} from './cryptotracker-shared/directives/cryptotracker-chart.directive';
 import {CryptotrackerDetailComponent} from './cryptotracker-detail/cryptotracker-detail.component';
+import {CryptotrackerDetailOverviewComponent} from './cryptotracker-detail/cryptotracker-detail-overview/cryptotracker-detail-overview.component';
 
 @NgModule({
     imports: [
@@ -19,7 +20,7 @@ import {CryptotrackerDetailComponent} from './cryptotracker-detail/cryptotracker
         CryptotrackerRoutingModule,
         IonicStorageModule.forRoot()
     ],
-    declarations: [CryptotrackerPage, CryptotrackerListPage, CryptotrackerDetailComponent, OnCreateChartDirective]
+    declarations: [CryptotrackerPage, CryptotrackerListPage, CryptotrackerDetailComponent, CryptotrackerDetailOverviewComponent, OnCreateChartDirective]
 })
 export class CryptotrackerPageModule {
 }

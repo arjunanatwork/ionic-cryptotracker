@@ -11,7 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class CryptotrackerListPage implements OnInit {
 
-  bitcoinData: RootObject;
+  cryptoData: RootObject;
   offset = 0;
   limit = 50;
 
@@ -26,10 +26,10 @@ export class CryptotrackerListPage implements OnInit {
     this.coinService.fetchCoinsData(offset, limit).subscribe(res => {
       this.offset = offset;
       this.limit = limit;
-      if (this.bitcoinData !== undefined) {
-        this.bitcoinData.data.coins.push(...res.data.coins);
+      if (this.cryptoData !== undefined) {
+        this.cryptoData.data.coins.push(...res.data.coins);
       } else {
-        this.bitcoinData = {...res};
+        this.cryptoData = {...res};
       }
       // Complete events
       if(event !== null)
@@ -40,7 +40,7 @@ export class CryptotrackerListPage implements OnInit {
   loadData(event, offset: number, limit: number) {
     setTimeout(() => {
       this.fetchCoinsFetchData(offset, limit, event);
-      if(this.offset > this.bitcoinData.data.stats.total) {
+      if(this.offset > this.cryptoData.data.stats.total) {
         event.target.disabled = true;
       }
     }, 500);
@@ -51,8 +51,8 @@ export class CryptotrackerListPage implements OnInit {
     this.fetchCoinsFetchData(0, 50, event);
   }
 
-  navigateToCoinDetail(id: number) {
-    this.router.navigate(['cryptotracker/coins', id], {relativeTo: this.route.parent});
+  navigateToCoinDetail(id: number, slug: string) {
+    this.router.navigate(['cryptotracker/coins', id], {relativeTo: this.route.parent, state: { slug : slug}});
   }
 
 }
