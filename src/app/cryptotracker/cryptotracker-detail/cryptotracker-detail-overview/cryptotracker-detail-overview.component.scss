@@ -13,3 +13,47 @@ ion-button.active-history {
   flex-direction: row;
   align-items: center;
 }
+
+.card-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item-title {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.item-subtitle {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.description-title,
+.link-title,
+.statistics-title,
+.coin-name,
+.coin-price {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.description-content, .link-item-title, .link-item-subtitle {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/** Media Queries **/
+@media (max-width: 567px) {
+
+  .description-title,
+  .link-title,
+  .statistics-title,
+  .coin-name,
+  .coin-price {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+}

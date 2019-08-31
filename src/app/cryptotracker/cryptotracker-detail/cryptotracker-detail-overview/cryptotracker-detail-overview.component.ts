@@ -4,6 +4,7 @@ import {CoinService} from '../../cryptotracker-shared/services/coin.service';
 import {Chart} from 'chart.js';
 import {RootObject} from '../../cryptotracker-shared/models/coin.model';
 import {DatePipe} from '@angular/common';
+import {Platform} from '@ionic/angular';
 
 @Component({
     selector: 'app-cryptotracker-detail-overview',
@@ -26,7 +27,7 @@ export class CryptotrackerDetailOverviewComponent implements OnInit {
     @Input() slug: string;
 
 
-    constructor(private coinService: CoinService, private router: Router, private route: ActivatedRoute, private datepipe: DatePipe) {
+    constructor(private coinService: CoinService, private router: Router, private route: ActivatedRoute, private datepipe: DatePipe, private platform: Platform) {
     }
 
     ngOnInit() {
@@ -188,19 +189,36 @@ export class CryptotrackerDetailOverviewComponent implements OnInit {
     private getChartTimeOptions(history: string) {
         switch (history) {
             case '24h':
-                return {unit: 'hour', unitStepSize: 1};
+                if (this.platform.is('mobile')) {
+                    return {unit: 'hour', unitStepSize: 6};
+                } else {
+                    return {unit: 'hour', unitStepSize: 1};
+                }
                 break;
             case '7d':
-                return {unit: 'day', unitStepSize: 1};
+                if (this.platform.is('mobile')) {
+                    return {unit: 'day', unitStepSize: 2};
+                } else {
+                    return {unit: 'day', unitStepSize: 1};
+                }
                 break;
             case '30d':
-                return {unit: 'day', unitStepSize: 2};
+                if (this.platform.is('mobile')) {
+                    return {unit: 'day', unitStepSize: 3};
+                } else {
+                    return {unit: 'day', unitStepSize: 1};
+                }
                 break;
             case '1y':
                 return {unit: 'month', unitStepSize: 1};
                 break;
             case '5y':
-                return {unit: 'month', unitStepSize: 3};
+                if (this.platform.is('mobile')) {
+                    return {unit: 'month', unitStepSize: 6};
+                } else {
+                    return {unit: 'day', unitStepSize: 1};
+                }
+
                 break;
         }
     }
