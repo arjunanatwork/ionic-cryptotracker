@@ -1,3 +1,13 @@
+ion-button {
+  --color: #5a8cc0;
+}
+
+ion-button.active-history {
+  --background: #5a8cc0;
+  --background-hover: #5a8cc0;
+  --color: #ffffff;
+}
+
 .coin-profile {
   display: flex;
   flex-direction: row;

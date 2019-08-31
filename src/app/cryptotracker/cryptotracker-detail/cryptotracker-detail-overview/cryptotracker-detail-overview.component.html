@@ -24,4 +24,10 @@
       <canvas id="chart" style="display: block;" class="chartjs-render-monitor"></canvas>
     </ion-col>
   </ion-row>
+  <ion-row margin-vertical>
+    <ion-col text-center>
+      <ion-button shape="round" fill="clear"  *ngFor="let history of ['24h','7d', '30d', '1y', '5y']; let i = index" [ngClass]="{ 'active-history' : activeIndex === i }"
+                  padding-horizontal (click)="changeHistory(i, history)">{{history}}</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-grid>
