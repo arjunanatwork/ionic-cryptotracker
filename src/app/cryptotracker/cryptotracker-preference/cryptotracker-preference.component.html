@@ -1,0 +1,24 @@
+<ion-grid padding>
+  <ion-row lines>
+    <ion-col>
+      <p text-center style="font-weight: 600">Preferences</p>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-label style="font-size: 15px; font-weight: 600">Currency</ion-label>
+      <ionic-selectable  [(ngModel)]="currency" itemValueField="id" itemTextField="name"
+                         [items]="currencies" [canSearch]="true"
+                         [hasInfiniteScroll]="true"
+                         (onInfiniteScroll)="getMoreCurrency($event)"
+                         (onSearch)="searchPorts($event)"
+                         (onChange)="currencySelected($event)"
+                         placeholder="Choose Currency">
+      <ng-template ionicSelectableItemTemplate let-currency="item">
+<!--        <img [src]="currency?.iconUrl" alt="currency.name" class="coin__logo" height="23" width="23"/>-->
+        <ion-label margin-start>{{currency?.symbol}} - {{currency?.name}}</ion-label>
+      </ng-template>
+      </ionic-selectable>
+    </ion-col>
+  </ion-row>
+</ion-grid>
