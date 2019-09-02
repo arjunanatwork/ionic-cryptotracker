@@ -8,75 +8,88 @@ import {CryptotrackerPreferenceComponent} from '../cryptotracker-preference/cryp
 import {Currency} from '../cryptotracker-shared/models/currency.model';
 
 @Component({
-  selector: 'app-cryptotracker-list',
-  templateUrl: './cryptotracker-list.page.html',
-  styleUrls: ['./cryptotracker-list.page.scss']
+    selector: 'app-cryptotracker-list',
+    templateUrl: './cryptotracker-list.page.html',
+    styleUrls: ['./cryptotracker-list.page.scss']
 })
 export class CryptotrackerListPage implements OnInit {
 
-  cryptoData: RootObject;
-  baseCurrency: Currency;
-  offset = 0;
-  limit = 50;
-  base = 'USD';
+    cryptoData: RootObject;
+    baseCurrency: Currency;
+    baseTimePeriod: any;
+    offset = 0;
+    limit = 50;
 
-  constructor(private coinService: CoinService, private storage: Storage,
-              private router: Router, private route: ActivatedRoute,
-              private popoverController: PopoverController) {
-  }
+    base = 'USD';
+    timePeriod = '24h';
 
-  ngOnInit() {
-    this.fetchCoinsFetchData(this.offset, this.limit, this.base, null);
-  }
+    constructor(private coinService: CoinService, private storage: Storage,
+                private router: Router, private route: ActivatedRoute,
+                private popoverController: PopoverController) {
+    }
 
-  fetchCoinsFetchData(offset: number, limit: number, base: string, event) {
-    this.coinService.fetchCoinsData(offset, limit, base).subscribe(res => {
-      this.offset = offset;
-      this.limit = limit;
-      if (this.cryptoData !== undefined) {
-        this.cryptoData.data.coins.push(...res.data.coins);
-      } else {
-        this.cryptoData = {...res};
-      }
-      // Complete events
-      if(event !== null)
-        event.target.complete();
-    });
-  }
+    ngOnInit() {
+        this.fetchCoinsFetchData(this.offset, this.limit, this.base, this.timePeriod, null);
+    }
 
-  loadData(event, offset: number, limit: number, base: string) {
-    setTimeout(() => {
-      this.fetchCoinsFetchData(offset, limit, base, event);
-      if (this.offset > this.cryptoData.data.stats.total) {
-        event.target.disabled = true;
-      }
-    }, 500);
-  }
+    fetchCoinsFetchData(offset: number, limit: number, base: string, timePeriod: string, event) {
+        this.coinService.fetchCoinsData(offset, limit, base, timePeriod).subscribe(res => {
+            this.offset = offset;
+            this.limit = limit;
+            if (this.cryptoData !== undefined) {
+                this.cryptoData.data.coins.push(...res.data.coins);
+            } else {
+                this.cryptoData = {...res};
+            }
+            // Complete events
+            if (event !== null) {
+                event.target.complete();
+            }
+        });
+    }
 
-  doRefresh(event) {
-    // Reset Offset while refreshing
-    this.cryptoData = undefined;
-    this.fetchCoinsFetchData(0, 50, this.base, event);
-  }
+    loadData(event, offset: number, limit: number, base: string, timePeriod: string) {
+        setTimeout(() => {
+            this.fetchCoinsFetchData(offset, limit, base, timePeriod, event);
+            if (this.offset > this.cryptoData.data.stats.total) {
+                event.target.disabled = true;
+            }
+        }, 500);
+    }
 
-  navigateToCoinDetail(id: number, slug: string) {
-    this.router.navigate(['cryptotracker/coins', id], {relativeTo: this.route.parent, state: { slug : slug, base: this.base}});
-  }
-
-  async preferencePopover(ev: any) {
-      const popover = await this.popoverController.create({
-        component: CryptotrackerPreferenceComponent,
-        componentProps: { currency: this.baseCurrency },
-        event: ev
-      });
-
-      popover.onDidDismiss().then((dataReturned) => {
-        this.baseCurrency = dataReturned.data.currencyData as Currency;
-        this.base = this.baseCurrency.symbol;
+    doRefresh(event) {
+        // Reset Offset while refreshing
         this.cryptoData = undefined;
-        this.fetchCoinsFetchData(0, 50, this.base, null);
-      });
+        this.fetchCoinsFetchData(0, 50, this.base, this.timePeriod, event);
+    }
 
-      return await popover.present();
-  }
+    navigateToCoinDetail(id: number, slug: string) {
+        this.router.navigate(['cryptotracker/coins', id], {relativeTo: this.route.parent, state: {slug: slug, base: this.base}});
+    }
+
+    async preferencePopover(ev: any) {
+        const popover = await this.popoverController.create({
+            component: CryptotrackerPreferenceComponent,
+            componentProps: {currency: this.baseCurrency, timePeriod: this.baseTimePeriod},
+            event: ev
+        });
+
+        popover.onDidDismiss().then((dataReturned) => {
+
+            if (dataReturned.role === 'currency') {
+                this.baseCurrency = dataReturned.data.currencyData as Currency;
+                this.base = this.baseCurrency.symbol;
+                this.cryptoData = undefined;
+                this.fetchCoinsFetchData(0, 50, this.base, this.timePeriod, null);
+            } else if (dataReturned.role === 'period') {
+                this.baseTimePeriod = dataReturned.data.timePeriodData;
+                this.timePeriod = this.baseTimePeriod.period;
+                this.cryptoData = undefined;
+                this.fetchCoinsFetchData(0, 50, this.base, this.timePeriod, null);
+            }
+
+        });
+
+        return await popover.present();
+    }
 }

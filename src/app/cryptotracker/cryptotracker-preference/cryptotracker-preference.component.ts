@@ -17,6 +17,8 @@ export class CryptotrackerPreferenceComponent implements OnInit {
     currency: Currency;
     currencySubscription: Subscription;
 
+    period: any
+    periods = [{id: 1, period: '24h'}, {id: 2, period: '7d'}, {id: 3, period: '30d'}]
     offset = 0;
     limit = 30;
 
@@ -25,6 +27,7 @@ export class CryptotrackerPreferenceComponent implements OnInit {
 
     ngOnInit(): void {
         this.currency = this.navParams.get('currency');
+        this.period = this.navParams.get('timePeriod');
     }
 
     searchPorts(event: { component: IonicSelectableComponent, text: string }) {
@@ -72,7 +75,10 @@ export class CryptotrackerPreferenceComponent implements OnInit {
     }
 
     currencySelected(event: { component: IonicSelectableComponent; value: any }) {
-        this.popoverController.dismiss({currencyData: event.value}, 'closed');
+        this.popoverController.dismiss({currencyData: event.value}, 'currency');
     }
 
+    periodSelected(event: { component: IonicSelectableComponent; value: any }) {
+        this.popoverController.dismiss({timePeriodData: event.value}, 'period');
+    }
 }

@@ -211,13 +211,17 @@ export class CryptotrackerDetailOverviewComponent implements OnInit {
                 }
                 break;
             case '1y':
-                return {unit: 'month', unitStepSize: 1};
+                if (this.platform.is('mobile')) {
+                    return {unit: 'month', unitStepSize: 2};
+                } else {
+                    return {unit: 'month', unitStepSize: 3};
+                }
                 break;
             case '5y':
                 if (this.platform.is('mobile')) {
                     return {unit: 'month', unitStepSize: 6};
                 } else {
-                    return {unit: 'day', unitStepSize: 1};
+                    return {unit: 'month', unitStepSize: 5};
                 }
 
                 break;

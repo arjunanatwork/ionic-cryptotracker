@@ -11,8 +11,8 @@ export class CoinService {
 
     constructor(private http: HttpClient) {}
 
-    fetchCoinsData(offset: number, limit: number, base: string) {
-        return this.http.get<RootObject>(`https://hub.coinranking.com/v1/public/coins?base=${base}&offset=${offset}&limit=${limit}`);
+    fetchCoinsData(offset: number, limit: number, base: string, timePeriod: string) {
+        return this.http.get<RootObject>(`https://hub.coinranking.com/v1/public/coins?base=${base}&offset=${offset}&limit=${limit}&timePeriod=${timePeriod}`);
     }
 
     fetchCoinsDataBySlug(slug: string, base: string) {
@@ -24,7 +24,7 @@ export class CoinService {
     }
 
     fetchCurrencies(prefix: string, offset: number, limit: number) {
-        return this.http.get<CurrencyRootObject>(`https://hub.coinranking.com/v1/public/currencies?prefix=${prefix}&offset=${offset}&limit=${limit}`);
+        return this.http.get<CurrencyRootObject>(`https://hub.coinranking.com/v1/public/currencies?limit=${limit}&offset=${offset}&prefix=${prefix}`);
     }
 
 }

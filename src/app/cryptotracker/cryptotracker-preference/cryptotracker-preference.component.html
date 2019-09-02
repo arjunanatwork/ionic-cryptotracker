@@ -15,10 +15,20 @@
                          (onChange)="currencySelected($event)"
                          placeholder="Choose Currency">
       <ng-template ionicSelectableItemTemplate let-currency="item">
-<!--        <img [src]="currency?.iconUrl" alt="currency.name" class="coin__logo" height="23" width="23"/>-->
+        <!--<img [src]="currency?.iconUrl" alt="currency.name" class="coin__logo" height="23" width="23"/>-->
         <ion-label margin-start>{{currency?.symbol}} - {{currency?.name}}</ion-label>
       </ng-template>
       </ionic-selectable>
     </ion-col>
   </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-label style="font-size: 15px; font-weight: 600">Time Period</ion-label>
+            <ionic-selectable  [(ngModel)]="period" itemValueField="id" itemTextField="period"
+                               [items]="periods"
+                               (onChange)="periodSelected($event)"
+                               placeholder="Choose Time Period">
+            </ionic-selectable>
+        </ion-col>
+    </ion-row>
 </ion-grid>

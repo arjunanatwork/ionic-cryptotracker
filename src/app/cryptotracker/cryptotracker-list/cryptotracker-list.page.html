@@ -33,7 +33,7 @@
                         </ion-label>
                     </ion-col>
                     <ion-col class="list-item" size="4">
-                        <ion-label class="coin-header">24H Change
+                        <ion-label class="coin-header">{{timePeriod}} Change
                         </ion-label>
                     </ion-col>
                 </ion-row>
@@ -58,7 +58,7 @@
                 </ion-row>
             </ion-grid>
         </ion-item>
-        <ion-infinite-scroll (ionInfinite)="loadData($event, offset+50, limit, base)" threshold="100px">
+        <ion-infinite-scroll (ionInfinite)="loadData($event, offset+50, limit, base, timePeriod)" threshold="100px">
             <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
         </ion-infinite-scroll>
     </ion-list>
