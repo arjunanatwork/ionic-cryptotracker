@@ -25,23 +25,24 @@ export class CryptotrackerDetailOverviewComponent implements OnInit {
     activeIndex: number;
 
     @Input() slug: string;
+    @Input() base: string;
 
 
-    constructor(private coinService: CoinService, private router: Router, private route: ActivatedRoute, private datepipe: DatePipe, private platform: Platform) {
-    }
+    constructor(private coinService: CoinService, private router: Router, private route: ActivatedRoute,
+                private datepipe: DatePipe, private platform: Platform) {}
 
     ngOnInit() {
         this.coinId = +this.route.snapshot.paramMap.get('id');
-        this.fetchCoinData(this.slug);
-        this.changeHistory(3, '1y');
+        this.fetchCoinData(this.slug, this.base);
+        this.changeHistory(3, '1y', this.base);
     }
 
     /**
      * Fetch the Coin Details based on slug
      * @param slug Slug name of the coin
      */
-    fetchCoinData(slug: string) {
-        this.coinService.fetchCoinsDataBySlug(slug).subscribe(res => {
+    fetchCoinData(slug: string, base: string) {
+        this.coinService.fetchCoinsDataBySlug(slug, base).subscribe(res => {
             this.cryptoData = {...res};
             this.sign = this.cryptoData.data.base.sign;
         });
@@ -52,10 +53,10 @@ export class CryptotrackerDetailOverviewComponent implements OnInit {
      * @param i index of the chip
      * @param history value of the chip
      */
-    changeHistory(i: number, history: string) {
+    changeHistory(i: number, history: string, base: string) {
         this.activeIndex = i;
         this.history = history;
-        this.fetchCoinHistory(this.coinId, history);
+        this.fetchCoinHistory(this.coinId, history, base);
     }
 
     /**
@@ -63,8 +64,8 @@ export class CryptotrackerDetailOverviewComponent implements OnInit {
      * @param coinId Id of the Coin
      * @param history History value
      */
-    fetchCoinHistory(coinId: number, history: string) {
-        this.coinService.fetchCoinHistory(this.coinId, history).subscribe(res => {
+    fetchCoinHistory(coinId: number, history: string, base: string) {
+        this.coinService.fetchCoinHistory(this.coinId, history, base).subscribe(res => {
             const chartOptions = this.getChartTimeOptions(history);
             if (this.chart === undefined) {
                 this.drawChart(res, history, chartOptions);

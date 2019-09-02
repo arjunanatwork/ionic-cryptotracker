@@ -10,11 +10,13 @@ export class CryptotrackerDetailComponent implements OnInit {
 
   segment: string;
   slug: string;
+  base: string;
 
   constructor(private router: Router, private route: ActivatedRoute) {
     route.params.subscribe(val => {
       try {
         this.slug = this.router.getCurrentNavigation().extras.state.slug;
+        this.base = this.router.getCurrentNavigation().extras.state.base;
         // Default to Overview
         this.segment = 'overview';
       } catch (e) {

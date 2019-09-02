@@ -27,7 +27,7 @@
   <ion-row margin-vertical>
     <ion-col text-center>
       <ion-button shape="round" fill="clear"  *ngFor="let history of ['24h','7d', '30d', '1y', '5y']; let i = index" [ngClass]="{ 'active-history' : activeIndex === i }"
-                  padding-horizontal (click)="changeHistory(i, history)">{{history}}</ion-button>
+                  padding-horizontal (click)="changeHistory(i, history, base)">{{history}}</ion-button>
     </ion-col>
   </ion-row>
     <ion-row margin-vertical>
@@ -105,9 +105,15 @@
                                 Socials
                             </ion-col>
                             <ion-col class="link-item-subtitle">
-                                <ion-label *ngFor="let social of cryptoData?.data.coins[0].socials" padding-end>
-                                    <ion-icon name="logo-{{social.type}}"></ion-icon><span style="font-weight: 600">{{social.name}}</span>
-                                </ion-label>
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col size-xl="5" size-xs="12" *ngFor="let social of cryptoData?.data.coins[0].socials">
+                                            <ion-label >
+                                                <ion-icon name="logo-{{social.type}}" ></ion-icon><span style="font-weight: 600">{{social.name}}</span>
+                                            </ion-label>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
                             </ion-col>
                         </ion-row>
                     </ion-grid>

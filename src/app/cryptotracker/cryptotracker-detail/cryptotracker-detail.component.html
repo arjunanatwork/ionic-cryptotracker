@@ -19,6 +19,6 @@
    </ion-segment-button>
  </ion-segment>
   <div [ngSwitch]="segment" padding>
-    <app-cryptotracker-detail-overview [slug]="slug" *ngSwitchCase="'overview'"></app-cryptotracker-detail-overview>
+    <app-cryptotracker-detail-overview [slug]="slug" [base]="base" *ngSwitchCase="'overview'"></app-cryptotracker-detail-overview>
   </div>
 </ion-content>

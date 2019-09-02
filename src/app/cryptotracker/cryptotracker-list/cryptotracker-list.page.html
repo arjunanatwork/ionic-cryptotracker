@@ -4,6 +4,11 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>Crypto Tracker</ion-title>
+        <ion-buttons slot="primary">
+            <ion-button (click)="preferencePopover($event)">
+                <ion-icon name="settings"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -34,7 +39,7 @@
                 </ion-row>
             </ion-grid>
         </ion-item>
-        <ion-item *ngFor="let coin of cryptoData?.data?.coins" lines="none" (click)="navigateToCoinDetail(coin.id, coin.slug)">
+        <ion-item *ngFor="let coin of cryptoData?.data?.coins" lines="none" [disabled]="coin.price === 'Infinity'" (click)="navigateToCoinDetail(coin.id, coin.slug)">
             <ion-grid>
                 <ion-row>
                     <ion-col class="list-item" size="4" style="justify-content: left">
@@ -44,8 +49,7 @@
                         </ion-label>
                     </ion-col>
                     <ion-col class="list-item" size="4">
-                        <ion-label
-                                class="coin-item">{{coin.price | currency}}{{cryptoData?.data?.base.sign}}</ion-label>
+                        <ion-label class="coin-item" *ngIf="coin.price !== 'Infinity';else nullContent">{{coin.price | currency:cryptoData?.data.base.sign}}</ion-label>
                     </ion-col>
                     <ion-col class="list-item" size="4">
                         <ion-label class="coin-item">{{coin.change}}%</ion-label>
@@ -54,8 +58,9 @@
                 </ion-row>
             </ion-grid>
         </ion-item>
-        <ion-infinite-scroll (ionInfinite)="loadData($event, offset+50, limit)" threshold="100px">
+        <ion-infinite-scroll (ionInfinite)="loadData($event, offset+50, limit, base)" threshold="100px">
             <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
         </ion-infinite-scroll>
     </ion-list>
 </ion-content>
+<ng-template #nullContent>null</ng-template>
