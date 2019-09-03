@@ -3,9 +3,10 @@ import {CoinService} from '../cryptotracker-shared/services/coin.service';
 import {Storage} from '@ionic/storage';
 import {RootObject} from '../cryptotracker-shared/models/coin.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {PopoverController} from '@ionic/angular';
+import {LoadingController, PopoverController} from '@ionic/angular';
 import {CryptotrackerPreferenceComponent} from '../cryptotracker-preference/cryptotracker-preference.component';
 import {Currency} from '../cryptotracker-shared/models/currency.model';
+import {load} from '@angular/core/src/render3';
 
 @Component({
     selector: 'app-cryptotracker-list',
@@ -25,7 +26,7 @@ export class CryptotrackerListPage implements OnInit {
 
     constructor(private coinService: CoinService, private storage: Storage,
                 private router: Router, private route: ActivatedRoute,
-                private popoverController: PopoverController) {
+                private popoverController: PopoverController, private loadingCtrl: LoadingController) {
     }
 
     ngOnInit() {
@@ -33,19 +34,24 @@ export class CryptotrackerListPage implements OnInit {
     }
 
     fetchCoinsFetchData(offset: number, limit: number, base: string, timePeriod: string, event) {
-        this.coinService.fetchCoinsData(offset, limit, base, timePeriod).subscribe(res => {
-            this.offset = offset;
-            this.limit = limit;
-            if (this.cryptoData !== undefined) {
-                this.cryptoData.data.coins.push(...res.data.coins);
-            } else {
-                this.cryptoData = {...res};
+        this.loadingCtrl.create({message: 'Loading....'}).then(loadingEle => {
+                loadingEle.present();
+                this.coinService.fetchCoinsData(offset, limit, base, timePeriod).subscribe(res => {
+                    this.offset = offset;
+                    this.limit = limit;
+                    if (this.cryptoData !== undefined) {
+                        this.cryptoData.data.coins.push(...res.data.coins);
+                    } else {
+                        this.cryptoData = {...res};
+                    }
+                    // Complete events
+                    if (event !== null) {
+                        event.target.complete();
+                    }
+                    loadingEle.dismiss();
+                });
             }
-            // Complete events
-            if (event !== null) {
-                event.target.complete();
-            }
-        });
+        );
     }
 
     loadData(event, offset: number, limit: number, base: string, timePeriod: string) {
