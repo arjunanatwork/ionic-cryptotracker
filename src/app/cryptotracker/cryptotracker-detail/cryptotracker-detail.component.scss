@@ -1,7 +1,23 @@
-ion-segment-button {
+ion-title {
+  color: #5a8cc0 !important;
+  font-weight: 600;
+}
+
+ion-back-button {
+  color: #5a8cc0 !important;
+}
+
+.md ion-segment-button {
   --color: #5a8cc0;
   --color-checked:#5a8cc0;
   --color-activated:#5a8cc0;
+  --border-color: #5a8cc0;
+  --indicator-color-checked: #5a8cc0;
+}
+
+.ios ion-segment-button {
+  --background: #5a8cc0;
+  --background-checked:#5a8cc0;
   --border-color: #5a8cc0;
   --indicator-color-checked: #5a8cc0;
 }

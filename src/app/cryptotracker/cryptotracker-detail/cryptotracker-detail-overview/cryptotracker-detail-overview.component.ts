@@ -74,7 +74,6 @@ export class CryptotrackerDetailOverviewComponent implements OnInit {
                     return {t: e.timestamp, y: e.price};
                 });
                 this.chart.options.scales.xAxes[0].time.unit = chartOptions.unit;
-                this.chart.options.scales.xAxes[0].time.unitStepSize = chartOptions.unitStepSize;
                 this.chart.update();
             }
         });
@@ -108,23 +107,30 @@ export class CryptotrackerDetailOverviewComponent implements OnInit {
             options: {
                 scales: {
                     xAxes: [{
+                        display: 1,
                         type: 'time',
-                        distribution: 'series',
                         time: {
                             unit: chartOptions.unit,
-                            unitStepSize: chartOptions.unitStepSize,
                             displayFormats: {
-                                minute: 'HH:mm',
-                                hour: 'HH:mm',
-                                day: 'MMM D',
-                                month: 'MMM YYYY',
+                                hour: 'LT',
+                                day: 'D MMM',
+                                month: 'MMM',
+                                quarter: 'MMM YYYY'
                             }
                         },
                         gridLines: {
-                            display: false
+                            display: !1,
+                            drawBorder: !1
+                        },
+                        ticks: {
+                            maxRotation: 0,
+                            minRotation: 0,
+                            autoSkip: !0
                         }
                     }],
                     yAxes: [{
+                        display: !1,
+                        type: 'linear',
                         ticks: {
                             display: false
                         },
@@ -133,7 +139,14 @@ export class CryptotrackerDetailOverviewComponent implements OnInit {
                             display: false
                         }
                     }]
-                }, tooltips: {
+                },
+            elements: {
+                point: {
+                    radius: 0,
+                    hitRadius: 2
+                }
+            },
+                tooltips: {
                     intersect: false,
                     axis: 'x',
                     callbacks: {
@@ -146,7 +159,8 @@ export class CryptotrackerDetailOverviewComponent implements OnInit {
                             } else if (this.history === '30d' || this.history === '7d' || this.history === '24h') {
                                 tooltipItem.xLabel = this.datepipe.transform(tooltipItem.xLabel, 'dd MMM H:mm');
                             }
-                            const label = tooltipItem.xLabel + ' ' + this.sign + parseFloat(tooltipItem.yLabel).toFixed(2);
+                            const sign = this.sign != null ? this.sign : '';
+                            const label = tooltipItem.xLabel + ' ' + sign + parseFloat(tooltipItem.yLabel).toFixed(2);
                             return label;
                         }
                     }
@@ -190,41 +204,20 @@ export class CryptotrackerDetailOverviewComponent implements OnInit {
     private getChartTimeOptions(history: string) {
         switch (history) {
             case '24h':
-                if (this.platform.is('mobile')) {
-                    return {unit: 'hour', unitStepSize: 6};
-                } else {
-                    return {unit: 'hour', unitStepSize: 1};
-                }
-                break;
+                    return {unit: 'hour'};
+                    break;
             case '7d':
-                if (this.platform.is('mobile')) {
-                    return {unit: 'day', unitStepSize: 2};
-                } else {
-                    return {unit: 'day', unitStepSize: 1};
-                }
-                break;
+                    return {unit: 'day'};
+                    break;
             case '30d':
-                if (this.platform.is('mobile')) {
-                    return {unit: 'day', unitStepSize: 3};
-                } else {
-                    return {unit: 'day', unitStepSize: 1};
-                }
-                break;
+                    return {unit: 'day'};
+                    break;
             case '1y':
-                if (this.platform.is('mobile')) {
-                    return {unit: 'month', unitStepSize: 2};
-                } else {
-                    return {unit: 'month', unitStepSize: 3};
-                }
-                break;
+                    return {unit: 'month'};
+                    break;
             case '5y':
-                if (this.platform.is('mobile')) {
-                    return {unit: 'month', unitStepSize: 6};
-                } else {
-                    return {unit: 'month', unitStepSize: 5};
-                }
-
-                break;
+                    return {unit: 'quarter'};
+                    break;
         }
     }
 }

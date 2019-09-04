@@ -39,7 +39,7 @@ export class CryptotrackerListPage implements OnInit {
                 this.coinService.fetchCoinsData(offset, limit, base, timePeriod).subscribe(res => {
                     this.offset = offset;
                     this.limit = limit;
-                    if (this.cryptoData !== undefined) {
+                    if (this.cryptoData !== undefined && event.type !== 'ionRefresh') {
                         this.cryptoData.data.coins.push(...res.data.coins);
                     } else {
                         this.cryptoData = {...res};
@@ -65,7 +65,6 @@ export class CryptotrackerListPage implements OnInit {
 
     doRefresh(event) {
         // Reset Offset while refreshing
-        this.cryptoData = undefined;
         this.fetchCoinsFetchData(0, 50, this.base, this.timePeriod, event);
     }
 
