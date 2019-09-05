@@ -51,9 +51,11 @@
                     <ion-col class="list-item" size="4">
                         <ion-label class="coin-item" *ngIf="coin.price !== 'Infinity';else nullContent">{{coin.price | currency:cryptoData?.data.base.sign}}</ion-label>
                     </ion-col>
-                    <ion-col class="list-item" size="4">
+                    <ion-col class="list-item" size="4" >
+                        <ion-icon class="ion-hide-sm-up" name="{{coin.change > 0 ? 'trending-up':'trending-down'}}" [ngClass]="coin.change > 0 ? 'trending-up':'trending-down'"
+                                  style="padding-right:5px;"></ion-icon>
                         <ion-label class="coin-item">{{coin.change}}%</ion-label>
-                        <div [coinData]="coin" class="sparkline" onCreate></div>
+                        <div [coinData]="coin" class="sparkline ion-hide-sm-down" onCreate></div>
                     </ion-col>
                 </ion-row>
             </ion-grid>

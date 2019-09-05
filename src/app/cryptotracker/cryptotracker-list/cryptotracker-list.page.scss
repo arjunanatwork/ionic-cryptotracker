@@ -7,6 +7,14 @@ ion-icon, ion-menu-button {
   color	: #5a8cc0;
 }
 
+ion-icon.trending-up {
+  color	: #2ac27a;
+}
+
+ion-icon.trending-down {
+  color	: #ff6060;
+}
+
 ion-col.list-item {
   display: flex;
   flex-direction: row;

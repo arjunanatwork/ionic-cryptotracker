@@ -2,7 +2,7 @@
   "name": "Crypto Tracker",
   "short_name": "Crypto Tracker",
   "description": "Crypto Tracker",
-  "theme_color": "#1976d2",
+  "theme_color": "#5a8cc0",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
