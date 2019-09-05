@@ -1,6 +1,6 @@
 {
-  "name": "ionic-sample-apps",
-  "version": "0.0.1",
+  "name": "ionic-cryptotracker",
+  "version": "1.0.0",
   "author": "Arjunan Ravi",
   "homepage": "https://ionicframework.com/",
   "scripts": {
