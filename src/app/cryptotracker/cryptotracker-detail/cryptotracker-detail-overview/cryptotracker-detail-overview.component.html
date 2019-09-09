@@ -16,7 +16,7 @@
   </ion-row>
   <ion-row margin-vertical>
     <ion-col text-center>
-      <ion-label><strong>{{cryptoData?.data.coins[0].name}} Price Chart</strong></ion-label>
+      <ion-label><strong>{{cryptoData?.data.coins[0].name}} - {{history}} Price Chart</strong></ion-label>
     </ion-col>
   </ion-row>
   <ion-row>
@@ -26,7 +26,7 @@
   </ion-row>
   <ion-row margin-vertical>
     <ion-col text-center>
-      <ion-button shape="round" fill="clear"  *ngFor="let history of ['24h','7d', '30d', '1y', '5y']; let i = index" [ngClass]="{ 'active-history' : activeIndex === i }"
+      <ion-button shape="round" fill="clear" size="small" *ngFor="let history of ['24h','7d', '30d', '1y', '5y']; let i = index" [ngClass]="{ 'active-history' : activeIndex === i }"
                   padding-horizontal (click)="changeHistory(i, history, base)">{{history}}</ion-button>
     </ion-col>
   </ion-row>
@@ -51,7 +51,7 @@
                 <ion-card-content>
                     <div class="card-items" margin-vertical>
                         <ion-label class="item-title">All Time High</ion-label>
-                        <ion-label class="item-subtitle" padding-horizontal>{{cryptoData?.data.base.sign}}{{cryptoData?.data.coins[0].allTimeHigh.price | numeral}}</ion-label>
+                        <ion-label class="item-subtitle" text-center padding-horizontal>{{cryptoData?.data.base.sign}}{{cryptoData?.data.coins[0].allTimeHigh.price | numeral}}</ion-label>
                     </div>
                 </ion-card-content>
             </ion-card>
@@ -61,7 +61,7 @@
                 <ion-card-content>
                     <div class="card-items" margin-vertical>
                         <ion-label class="item-title">Market Cap</ion-label>
-                        <ion-label class="item-subtitle" padding-horizontal>{{cryptoData?.data.base.sign}}{{cryptoData?.data.coins[0].marketCap | numeralInt}}</ion-label>
+                        <ion-label class="item-subtitle" text-center padding-horizontal>{{cryptoData?.data.base.sign}}{{cryptoData?.data.coins[0].marketCap | numeralInt}}</ion-label>
                     </div>
                 </ion-card-content>
             </ion-card>
@@ -71,7 +71,7 @@
                 <ion-card-content>
                     <div class="card-items" margin-vertical>
                         <ion-label class="item-title">24H Trade Volume</ion-label>
-                        <ion-label class="item-subtitle" padding-horizontal>{{cryptoData?.data.base.sign}}{{cryptoData?.data.coins[0].volume | numeralInt }}</ion-label>
+                        <ion-label class="item-subtitle" text-center padding-horizontal>{{cryptoData?.data.base.sign}}{{cryptoData?.data.coins[0].volume | numeralInt }}</ion-label>
                     </div>
                 </ion-card-content>
             </ion-card>
