@@ -33,7 +33,7 @@ export class CryptotrackerListPage implements OnInit {
     }
 
     fetchCoinsFetchData(offset: number, limit: number, base: string, timePeriod: string, event) {
-        this.loadingCtrl.create({message: 'Loading....'}).then(loadingEle => {
+        this.loadingCtrl.create({message: 'Loading Prices....'}).then(loadingEle => {
                 loadingEle.present();
                 this.coinService.fetchCoinsData(offset, limit, base, timePeriod).subscribe(res => {
                     this.offset = offset;
