@@ -6,7 +6,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LoadingController, PopoverController} from '@ionic/angular';
 import {CryptotrackerPreferenceComponent} from '../cryptotracker-preference/cryptotracker-preference.component';
 import {Currency} from '../cryptotracker-shared/models/currency.model';
-import {load} from '@angular/core/src/render3';
 
 @Component({
     selector: 'app-cryptotracker-list',

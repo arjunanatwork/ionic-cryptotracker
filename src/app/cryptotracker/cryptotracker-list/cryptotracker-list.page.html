@@ -24,15 +24,19 @@
         <ion-item>
             <ion-grid>
                 <ion-row>
-                    <ion-col class="list-item" size="4">
+                    <ion-col class="list-item" size-xs="4" size-xl="3" size-md="3">
                         <ion-label class="coin-header">Cryptocurrencies
                         </ion-label>
                     </ion-col>
-                    <ion-col class="list-item" size="4">
+                    <ion-col class="list-item" size-xs="4" size-xl="3" size-md="3">
                         <ion-label class="coin-header">Price
                         </ion-label>
                     </ion-col>
-                    <ion-col class="list-item" size="4">
+                    <ion-col class="list-item ion-hide-sm-down" size-xl="3" size-md="3">
+                        <ion-label class="coin-header">Market Cap
+                        </ion-label>
+                    </ion-col>
+                    <ion-col class="list-item" size-xs="4" size-xl="3" size-md="3">
                         <ion-label class="coin-header">{{timePeriod}} Change
                         </ion-label>
                     </ion-col>
@@ -42,27 +46,33 @@
         <ion-item *ngFor="let coin of cryptoData?.data?.coins" lines="none" [disabled]="coin.price === 'Infinity'" (click)="navigateToCoinDetail(coin.id, coin.slug)">
             <ion-grid>
                 <ion-row>
-                    <ion-col class="list-item" size="4" style="justify-content: left">
+                    <ion-col class="list-item" size-xs="4" size-xl="3" size-md="3" style="justify-content: left">
                         <img [src]="coin.iconUrl" alt="Bitcoin (BTC) icon" class="coin__logo"
                              height="23" width="23"/>
                         <ion-label class="coin-item coin-sym">{{coin.name}}
                         </ion-label>
                     </ion-col>
-                    <ion-col class="list-item" size="4">
-                        <ion-label class="coin-item" *ngIf="coin.price !== 'Infinity';else nullContent">{{coin.price | currency:cryptoData?.data.base.sign}}</ion-label>
+                    <ion-col class="list-item" size-xs="4" size-xl="3" size-md="3">
+                        <ion-label class="coin-item" *ngIf="coin.price !== 'Infinity';else nullCoinPriceContent">{{cryptoData?.data.base.sign}}{{coin.price | numeral}}</ion-label>
                     </ion-col>
-                    <ion-col class="list-item" size="4" >
+                    <ion-col class="list-item ion-hide-sm-down" size-xs="4" size-xl="3" size-md="3">
+                        <ion-label class="coin-item"  *ngIf="coin.marketCap !== null;else nullCoinCapContent">{{cryptoData?.data.base.sign}}{{coin.marketCap | numeralInt}}</ion-label>
+                    </ion-col>
+                    <ion-col class="list-item" size-xs="4" size-xl="3" size-md="3">
                         <ion-icon class="ion-hide-sm-up" name="{{coin.change > 0 ? 'trending-up':'trending-down'}}" [ngClass]="coin.change > 0 ? 'trending-up':'trending-down'"
                                   style="padding-right:5px;"></ion-icon>
-                        <ion-label class="coin-item">{{coin.change}}%</ion-label>
+                        <ion-label class="coin-item" *ngIf="coin.change !== null;else nullCoinChangeContent">{{coin.change}}%</ion-label>
                         <div [coinData]="coin" class="sparkline ion-hide-sm-down" onCreate></div>
                     </ion-col>
                 </ion-row>
             </ion-grid>
+            <ng-template #nullCoinPriceContent> <ion-label class="coin-item">0.00 {{cryptoData?.data.base.symbol}}</ion-label></ng-template>
+            <ng-template #nullCoinCapContent> <ion-label class="coin-item">0{{cryptoData?.data.base.symbol}}</ion-label></ng-template>
+            <ng-template #nullCoinChangeContent> <ion-label class="coin-item">0.00%</ion-label></ng-template>
         </ion-item>
         <ion-infinite-scroll (ionInfinite)="loadData($event, offset+50, limit, base, timePeriod)" threshold="100px">
             <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
         </ion-infinite-scroll>
     </ion-list>
 </ion-content>
-<ng-template #nullContent>null</ng-template>
+

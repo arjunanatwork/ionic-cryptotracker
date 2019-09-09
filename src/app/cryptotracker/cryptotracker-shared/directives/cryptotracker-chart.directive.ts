@@ -1,6 +1,7 @@
 import {Directive, ElementRef, Input, OnInit} from '@angular/core';
-import {Coin} from '../models/coin.model';
+import { Coin } from '../models/coin.model';
 import { Chart } from 'sparkline.js';
+
 
 @Directive({
     selector: '[onCreate]',

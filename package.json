@@ -31,6 +31,7 @@
     "chart.js": "^2.8.0",
     "core-js": "^2.5.4",
     "ionic-selectable": "^4.4.0",
+    "numeral": "^2.0.6",
     "rxjs": "~6.5.1",
     "sparkline.js": "0.0.2",
     "tslib": "^1.9.0",

@@ -13,6 +13,8 @@ import {CryptotrackerDetailComponent} from './cryptotracker-detail/cryptotracker
 import {CryptotrackerDetailOverviewComponent} from './cryptotracker-detail/cryptotracker-detail-overview/cryptotracker-detail-overview.component';
 import {CryptotrackerPreferenceComponent} from './cryptotracker-preference/cryptotracker-preference.component';
 import {IonicSelectableModule} from 'ionic-selectable';
+import {NumeralPipe} from './cryptotracker-shared/pipes/cryptotracker-numeral.pipe';
+import {NumeralIntegerPipe} from './cryptotracker-shared/pipes/cryptotracker-numeral-integer.pipe';
 
 @NgModule({
     imports: [
@@ -27,7 +29,7 @@ import {IonicSelectableModule} from 'ionic-selectable';
         CryptotrackerPreferenceComponent
     ],
     declarations: [CryptotrackerPage, CryptotrackerListPage, CryptotrackerDetailComponent,
-        CryptotrackerDetailOverviewComponent, CryptotrackerPreferenceComponent, OnCreateChartDirective]
+        CryptotrackerDetailOverviewComponent, CryptotrackerPreferenceComponent, OnCreateChartDirective, NumeralPipe, NumeralIntegerPipe]
 })
 export class CryptotrackerPageModule {
 }
