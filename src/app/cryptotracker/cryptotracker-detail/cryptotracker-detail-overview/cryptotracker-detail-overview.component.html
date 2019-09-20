@@ -41,7 +41,7 @@
                 <ion-card-content>
                     <div class="card-items" margin-vertical>
                         <ion-label class="item-title">Rank</ion-label>
-                        <ion-label class="item-subtitle" padding-horizontal>{{cryptoData?.data.coins[0].rank}}</ion-label>
+                        <ion-label class="item-subtitle">{{cryptoData?.data.coins[0].rank}}</ion-label>
                     </div>
                 </ion-card-content>
             </ion-card>
@@ -51,7 +51,7 @@
                 <ion-card-content>
                     <div class="card-items" margin-vertical>
                         <ion-label class="item-title">All Time High</ion-label>
-                        <ion-label class="item-subtitle" text-center padding-horizontal>{{cryptoData?.data.base.sign}}{{cryptoData?.data.coins[0].allTimeHigh.price | numeral}}</ion-label>
+                        <ion-label class="item-subtitle">{{cryptoData?.data.base.sign}}{{cryptoData?.data.coins[0].allTimeHigh.price | numeral}}</ion-label>
                     </div>
                 </ion-card-content>
             </ion-card>
@@ -61,7 +61,7 @@
                 <ion-card-content>
                     <div class="card-items" margin-vertical>
                         <ion-label class="item-title">Market Cap</ion-label>
-                        <ion-label class="item-subtitle" text-center padding-horizontal>{{cryptoData?.data.base.sign}}{{cryptoData?.data.coins[0].marketCap | numeralInt}}</ion-label>
+                        <ion-label class="item-subtitle">{{cryptoData?.data.base.sign}}{{cryptoData?.data.coins[0].marketCap | numeralInt}}</ion-label>
                     </div>
                 </ion-card-content>
             </ion-card>
@@ -71,7 +71,7 @@
                 <ion-card-content>
                     <div class="card-items" margin-vertical>
                         <ion-label class="item-title">24H Trade Volume</ion-label>
-                        <ion-label class="item-subtitle" text-center padding-horizontal>{{cryptoData?.data.base.sign}}{{cryptoData?.data.coins[0].volume | numeralInt }}</ion-label>
+                        <ion-label class="item-subtitle">{{cryptoData?.data.base.sign}}{{cryptoData?.data.coins[0].volume | numeralInt }}</ion-label>
                     </div>
                 </ion-card-content>
             </ion-card>
